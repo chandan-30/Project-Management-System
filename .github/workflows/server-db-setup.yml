@@ -1,0 +1,42 @@
+name: Server and DB setup
+
+on:
+    pull_request:
+        branches:
+            - main
+        # paths:
+        #     - 'client/**' # Trigger only when changes occur in the 'client' directory
+    push:
+        branches:
+            - 'dev-main'
+        # paths:
+        #     - 'client/**'
+
+jobs:
+    start:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+              node-version: ['16.x', '18.x']        
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                node-version: ${{ matrix.node-version }}
+
+            - name: Install Dependencies
+              working-directory: server
+              run: npm install
+        
+            # - name: start
+            #   working-directory: server
+            #   run: npm run start
+            #   env:
+            #     MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+            - name: Exit Job Early on Condition
+              run: exit 0  # Replace this with your actual condition
+              if: success()  
