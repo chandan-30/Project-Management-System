@@ -1,0 +1,70 @@
+.sideBar{
+    min-height: 100vh;
+}
+ 
+.profileName {
+    font-family: 'Nanum Pen Script';
+}
+.sidebarToggle {
+    display: none; 
+}
+
+.img-container {
+    margin: 25% auto 10% auto;
+    max-width: max-content;
+}
+
+.img-container img {
+    border-radius: 50%;
+}
+
+.list {
+    margin-top: 50%;
+    
+}
+.list li {
+    position: relative;
+    max-width:140px;
+    margin: 20px auto;
+}
+
+.list li svg {
+    position: absolute;
+    top: 4px;
+    left: 0;
+}
+
+@media screen and (max-width: 576px) {
+    .sideBar {
+        display: none;
+        position: absolute;
+        min-width: 60%;
+        z-index: 1;
+    }
+
+    .sidebarToggle {
+        display: block ;
+        max-width: max-content;
+        padding-top: 2px;
+        color: var(--text-color);
+        position: absolute;
+        z-index: 2;
+        left: -20px;
+        top: 50px;
+        border-left: none;
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+    .container-fluid .row span {
+        display: none;
+    }
+    .container-fluid .row div.sidebarToggle {
+        display: none !important;
+    }
+    .container-fluid .row div.sideBar {
+        display: block !important;
+    }
+}
+
