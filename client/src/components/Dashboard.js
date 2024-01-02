@@ -1,11 +1,11 @@
 import React from 'react';
-import './dashboard.css';
+import './css/dashboard.css';
 
 const Dashboard = () => {
   return (
-    <div className="col dashboard">
-        Column
-    </div>
+    <>
+        Dashboard
+    </>
   )
 }
 

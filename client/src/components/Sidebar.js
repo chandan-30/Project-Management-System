@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import './sidebar.css';
+import './css/sidebar.css';
 import { FaArrowLeft } from "react-icons/fa";
 import {getRandomAvatar} from '../utils';
 import {img1, img2, img3, img4} from '../assets/avatars';
@@ -7,6 +7,8 @@ import { useCallback } from 'react';
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { GrLogout } from "react-icons/gr";
+import { Link } from 'react-router-dom';
+import AnimatedButton from './AnimatedButton'
 
 const Sidebar = () => {
     const image = useRef(getRandomAvatar([img1, img2, img3, img4 ]));
@@ -39,9 +41,24 @@ const Sidebar = () => {
             <h2 className='text-3xl font-bold profileName'> Sai Chandan Yata </h2>
 
             <ul className='list'>
-                <li> <MdSpaceDashboard /> Dashboard </li>
-                <li> <FaPlus /> Add Project </li>
-                <li> <GrLogout /> Logout </li>
+                <li> 
+                    <MdSpaceDashboard />
+                    <AnimatedButton>
+                        <Link to="/" >  Dashboard </Link> 
+                    </AnimatedButton>
+                </li>
+                <li> 
+                    <FaPlus />
+                    <AnimatedButton>
+                        Add Project
+                    </AnimatedButton>
+                </li>
+                <li> 
+                    <GrLogout />
+                    <AnimatedButton>
+                    <Link to="/login" > Logout </Link>
+                    </AnimatedButton>
+                </li>
             </ul>
 
             <span className=' absolute sideBar__close left-[90%] z-2 top-1' onClick={sideBarCloseClick}>

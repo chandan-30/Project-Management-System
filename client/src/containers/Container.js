@@ -1,6 +1,8 @@
 import React, { } from 'react'
 import './container.css';
-import { Dashboard, Sidebar, SidebarToggle } from '../components';
+import { Sidebar, SidebarToggle, Header } from '../components';
+import { Outlet } from 'react-router-dom';
+
 
 const Container = () => {
 
@@ -10,7 +12,10 @@ const Container = () => {
             <div className="row py-6 px-2 relative" >
                 <SidebarToggle></SidebarToggle>
                 <Sidebar></Sidebar>
-                <Dashboard></Dashboard>
+                <div className="col dashboard">
+                    <Header />
+                    <Outlet />
+                </div>
             </div>
         </div>
     </>
