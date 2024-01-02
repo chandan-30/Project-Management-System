@@ -5,7 +5,7 @@ import {getRandomAvatar} from '../utils';
 import {img1, img2, img3, img4} from '../assets/avatars';
 import { useCallback } from 'react';
 import { MdSpaceDashboard } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
+import { LuUsers } from "react-icons/lu";
 import { GrLogout } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 import AnimatedButton from './AnimatedButton'
@@ -48,9 +48,9 @@ const Sidebar = () => {
                     </AnimatedButton>
                 </li>
                 <li> 
-                    <FaPlus />
+                    <LuUsers />
                     <AnimatedButton>
-                        Add Project
+                        All Users
                     </AnimatedButton>
                 </li>
                 <li> 

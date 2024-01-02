@@ -4,3 +4,5 @@ export { default as SidebarToggle } from './SidebarToggle';
 export { default as Tickets } from './Tickets';
 export { default as Header } from './Header';
 export { default as AnimatedButton } from './AnimatedButton';
+export { default as Card } from './Card';
+export { default as AddCard } from './AddCard';

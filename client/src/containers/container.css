@@ -4,4 +4,10 @@
     margin: 10px;
     border: 2px solid rgba(120, 118, 118, 0.318);
     border-radius: 6px;
+    
+}
+
+.dashboard {
+    overflow-y: auto;
+    padding-bottom: 20px;
 }

@@ -1,0 +1,31 @@
+.card {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-align: left;
+    padding: 15px 10px;
+    min-width: 200px;
+    height: 200px;
+}
+
+.card__title { 
+}
+
+.card__desc {
+
+}
+
+.card__footer {
+    
+    bottom:10px;
+    margin-top: 70px;
+}
+
+.Incomplete {
+    background-color: var(--btn-red);
+}
+
+@media screen and (max-width: 330px) {
+    .card {
+        width: 95%;
+    }
+}
