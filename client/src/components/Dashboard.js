@@ -8,6 +8,9 @@ const Dashboard = () => {
     <>
         <div className='grid-container'>
             <Card />
+            <Card />
+            <Card />
+            <Card />
             <AddCard />
         </div>
     </>
