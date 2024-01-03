@@ -5,7 +5,6 @@ const initialState = {
         {
             name: 'Sai Chandan Yata',
             email: 'sai.chandan.030@gmail.com',
-            profilepic: 
         },
     ],
 };
