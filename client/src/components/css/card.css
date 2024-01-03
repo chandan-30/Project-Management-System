@@ -20,8 +20,12 @@
     margin-top: 70px;
 }
 
+.Complete {
+    color: var(--btn-green);
+}
+
 .Incomplete {
-    background-color: var(--btn-red);
+    color: var(--btn-red);
 }
 
 @media screen and (max-width: 330px) {

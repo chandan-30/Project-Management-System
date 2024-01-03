@@ -2,9 +2,7 @@
     min-height: 100vh;
 }
  
-.profileName {
-    font-family: 'Nanum Pen Script';
-}
+
 .sidebarToggle {
     display: none; 
 }

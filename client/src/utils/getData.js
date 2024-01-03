@@ -5,7 +5,7 @@ const data =
                 name: 'Ticket 1',
                 desc: 'Some random text',
                 status: 'Incomplete',
-                dueData: 'Tue Jan 02 2024',
+                dueData: '30-07-2024',
             }
         ],
         users: [
