@@ -1,26 +1,28 @@
 import React from 'react'
 import './css/card.css';
-import { data } from '../utils';
-import AnimatedButton from './AnimatedButton';
 import { RiFileEditFill, RiDeleteBin4Fill } from "react-icons/ri";
 import TaskCard from './TaskCard';
 
-const Card = () => {
-    //console.log(data)
+
+const Card = ({task}) => {
+    let desc = task.Description;
+    if (desc.length > 60) {
+        desc = desc.slice(0, 60) + '...';
+      }
   return (
         <>
             
             <div className='card cursor-pointer' data-bs-toggle="modal" data-bs-target="#taskModal">
                 <div className='card__title font-semibold text-md'>
-                    { data.tickets[0].name }
+                    { task.Title }
                 </div>
                 <div className='card__desc mt-1 text-sm text-ellipsis'>
-                    { data.tickets[0].desc }
+                    { desc }
                 </div>
                 <div className='card__footer'>
-                    <p className='text-xs opacity-50'> { data.tickets[0].dueData } </p>
-                    <div className={`float-left my-2 font-bold ${data.tickets[0].status}`}>
-                        {data.tickets[0].status}
+                    <p className='text-xs opacity-50'> { task.Deadline } </p>
+                    <div className={`float-left my-2 font-bold ${task.Status}`}>
+                        {task.Status}
                     </div>
                     <div className='float-right pt-2 text-xl'>
                         <button className='mr-4' data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick={(e)=>{
@@ -29,15 +31,15 @@ const Card = () => {
                         }}>
                             <RiFileEditFill className='text-2xl'/>
                         </button>
-                        <AnimatedButton >
+                        {}<button>
                             <RiDeleteBin4Fill className='text-2xl'/>
-                        </AnimatedButton>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <TaskCard title={'Task Details'} save={false} disable={'disabled'} id={'taskModal'}/>
-            <TaskCard title={'Edit Task Details'} save={true} disable={''} id={'editTaskModal'}/>
+            <TaskCard task={task} title={'Task Details'} save={false} disable={'disabled'} id={'taskModal'}/>
+            <TaskCard task={task} title={'Edit Task Details'} save={true} disable={''} id={'editTaskModal'}/>
 
         </>
   )

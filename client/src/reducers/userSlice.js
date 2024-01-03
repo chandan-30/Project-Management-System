@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    users: [
-        {
-            name: 'Sai Chandan Yata',
-            email: 'sai.chandan.030@gmail.com',
-        },
-    ],
+    users: [],
 };
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        getUser: (state, action) => {
+            if (action.payload) {
+                state.users = action.payload;
+            }
+        },
         addUser: (state, action) => {
             if (action.payload) {
                 state.users.push(action.payload);
@@ -21,5 +21,6 @@ export const userSlice = createSlice({
     }
 });
 
-export const { addUser } = userSlice.actions;
+
+export const { addUser, getUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -4,20 +4,20 @@
     text-align: left;
     padding: 15px 10px;
     min-width: 200px;
-    height: 200px;
+    height: 250px;
 }
 
 .card__title { 
 }
 
 .card__desc {
-
+    /* max-width: 250px; */
 }
 
 .card__footer {
     
     bottom:10px;
-    margin-top: 70px;
+    margin-top: 95px;
 }
 
 .Complete {
