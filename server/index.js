@@ -34,3 +34,26 @@ app.get('/tasks', async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 });
+
+app.put("/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
+    return res.status(200).json(updatedTask);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: 'Failed to process request' });
+  }
+  
+});
+
+app.post("/tasks/", async (req, res) => {
+  try {
+    const newTask = new Task({...req.body});
+    const addTask = await newTask.save();
+    return res.status(201).json(addTask);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: 'Failed to process request' });
+  }
+});

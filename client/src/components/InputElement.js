@@ -1,27 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const InputElement = ({label, type, disable, val}) => {
+const InputElement = ({label, type, disable, val, taskDetails }) => {
+    const [inpval, setInpVal] = useState(val);
+    useEffect( () => {
+
+        taskDetails.setForm({
+            ...taskDetails.form,
+            [label]: inpval,
+        })
+    }, [inpval]);
   return (
     <>
         <div className="mb-3">
-            <label className="form-label font-semibold">{label}</label>
+            <label className="form-label font-semibold">{label + '*'}</label>
             <div className="input-group">
                 { type === 'textarea' && (
-                    <textarea onChange={()=>{}} value={val} disabled={disable} className="form-control" placeholder="eg: something here" id="floatingTextarea"></textarea>
+                    <textarea onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} className="form-control" placeholder="eg: something here" id="floatingTextarea" autocomplete="off" ></textarea>
                 )}
 
                 { type === 'text' && (
-                    <input onChange={()=>{}}  value={val} disabled={disable} type={type} className="form-control" placeholder="eg: Something here" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
+                    <input onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} type={type} className="form-control" placeholder="eg: Something here" id="basic-url" aria-describedby="basic-addon3 basic-addon4" autocomplete="off" />
                 )}
 
                 { type === 'date' && (
-                    <input onChange={()=>{}}  value={val} disabled={disable} type={type} id="basic-url" aria-describedby="basic-addon3 basic-addon4"  name="trip-start"  min="2023-01-01" max="2024-12-31"/>
+                    <input onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} type={type} id="basic-url" aria-describedby="basic-addon3 basic-addon4"  name="trip-start"  min="2023-01-01" max="2024-12-31" autocomplete="off"/>
                 )}
 
 
                 { type ==='select' && label === 'Priority' && (
                     <div className="form-floating select">
-                        <select onChange={()=>{}}  value={val} disabled={disable} className="form-select" id="floatingSelect" aria-label="Floating label select example"> 
+                        <select onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} className="form-select" id="floatingSelect" aria-label="Floating label select example" autocomplete="off"> 
                             <option value="High">High</option>
                             <option value="Low">Low</option>
                         </select>
@@ -30,7 +38,7 @@ const InputElement = ({label, type, disable, val}) => {
 
                 { type ==='select' && label === 'Status' && (
                     <div className="form-floating select">
-                        <select onChange={()=>{}}  value={val} disabled={disable} className="form-select" id="floatingSelect" aria-label="Floating label select example"> 
+                        <select onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} className="form-select" id="floatingSelect" aria-label="Floating label select example" autocomplete="off"> 
                             <option value="Complete">Complete</option>
                             <option value="Incomplete">Incomplete</option>
                         </select>

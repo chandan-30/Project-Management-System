@@ -5,6 +5,7 @@ import TaskCard from './TaskCard';
 
 
 const Card = ({task}) => {
+    
     let desc = task.Description;
     if (desc.length > 60) {
         desc = desc.slice(0, 60) + '...';
@@ -25,13 +26,17 @@ const Card = ({task}) => {
                         {task.Status}
                     </div>
                     <div className='float-right pt-2 text-xl'>
-                        <button className='mr-4' data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick={(e)=>{
+                        <button className='mr-4' data-task-id={task._id} data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick={(e)=>{
                             e.preventDefault();
                             e.stopPropagation();
+                            
                         }}>
                             <RiFileEditFill className='text-2xl'/>
                         </button>
-                        {}<button>
+                        <button data-task-id={task._id} onClick={(e)=>{
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }}>
                             <RiDeleteBin4Fill className='text-2xl'/>
                         </button>
                     </div>
@@ -40,6 +45,7 @@ const Card = ({task}) => {
 
             <TaskCard task={task} title={'Task Details'} save={false} disable={'disabled'} id={'taskModal'}/>
             <TaskCard task={task} title={'Edit Task Details'} save={true} disable={''} id={'editTaskModal'}/>
+            
 
         </>
   )
