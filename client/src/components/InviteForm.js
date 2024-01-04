@@ -39,7 +39,7 @@ const submitHandler = (e) => {
                 <div className="form-floating mb-3">
                     <input onChange={(e)=>setForm({...form, 'email': e.currentTarget.value })} value={form.email}  type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required />
                 </div>
-                <button type="submit" class="btn btn-success bg-green-600">Send Invite!</button>
+                <button type="submit" className="btn btn-success bg-green-600">Send Invite!</button>
             </div>
         </form>
     </>

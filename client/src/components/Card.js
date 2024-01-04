@@ -4,12 +4,15 @@ import { RiFileEditFill, RiDeleteBin4Fill } from "react-icons/ri";
 import TaskCard from './TaskCard';
 import axios from 'axios';
 import { removeTask } from '../reducers/taskSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Card = ({task}) => {
     
     const dispatch = useDispatch();
-
+    const loggedUser = useSelector( state => {
+        return state.loggedUser.loggedUser;
+    });
+    
     let desc = task.Description;
     if (desc.length > 60) {
         desc = desc.slice(0, 60) + '...';
@@ -19,10 +22,19 @@ const Card = ({task}) => {
         
         e.preventDefault();
         e.stopPropagation();
+        if ( loggedUser.role !== 'admin' ) {
+            alert('You are not allowed to delete the tasks');
+            return;
+        }
+        
         const taskId = e.currentTarget.getAttribute('data-task-id');
         if (taskId) {
             //Make a PUT request to update the task
-            axios.delete(`http://localhost:8000/tasks/${taskId}`)
+            axios.delete(`http://localhost:8000/tasks/${taskId}`, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+              })
                 .then(res => {
                     if (res.status !== 200 && res.statusText !== 'OK' ) {
                         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -52,13 +64,12 @@ const Card = ({task}) => {
                             {task.Status}
                         </div>
                         <div className='float-right pt-2 text-xl'>
-                            <button className='mr-10' data-task-id={task._id} data-bs-toggle="modal" data-bs-target={`#editTask-${task._id}`} onClick={(e)=>{
+                            <button className='mr-2' data-task-id={task._id} data-bs-toggle="modal" data-bs-target={`#editTask-${task._id}`} onClick={(e)=>{
                                 e.preventDefault();
                                 e.stopPropagation();
                             }}>
                                 <RiFileEditFill className='text-2xl'/>
                             </button>
-                            
                         </div>
                     </div>
                 </div>

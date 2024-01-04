@@ -20,14 +20,20 @@ const TaskCard = ({title, save, id, disable, task}) => {
       };
 
     const [form, setForm] = useState(taskDetails);
+    // eslint-disable-next-line no-unused-vars
     const [access, setAccess] = useState(true);
+    
 
     const saveHandler = (e) => {
         // Retrieve the data-task-id attribute
          const taskId = e.currentTarget.getAttribute('data-task-id');
          if(taskId) {
             // Make a PUT request to update the task
-            axios.put(`http://localhost:8000/tasks/${taskId}`, form)
+            axios.put(`http://localhost:8000/tasks/${taskId}`, form, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+              })
                 .then(res => {
                     if (res.status !== 200 && res.statusText !== 'OK' ) {
                         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -42,7 +48,11 @@ const TaskCard = ({title, save, id, disable, task}) => {
             });
          } else {
             // Make a POST request to add new task
-            axios.post(`http://localhost:8000/tasks/${taskId}`, form)
+            axios.post(`http://localhost:8000/tasks/${taskId}`, form, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+              })
                 .then(res => {
                     if (res.status !== 201 && res.statusText !== 'OK' ) {
                         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -66,6 +76,8 @@ const TaskCard = ({title, save, id, disable, task}) => {
             setAccess(true);
         }
     },[form]);
+
+    
     
   return (
     <>
@@ -92,11 +104,18 @@ const TaskCard = ({title, save, id, disable, task}) => {
                             Please fill out all fields with * mark
                         </p>
                     )}
+
+                    {/* {   loggedUser.name && save && (
+                        <p className='text-sm opacity-40 text-red-400 font-semibold'>
+                            You are not allowed to edit this task !
+                        </p>
+                    )
+                    } */}
                     <div className="modal-footer border-none">
                         
                         <br />
                         <button type="button" className="btn bg-gray-500 btn-secondary" data-bs-dismiss="modal">Close</button>
-                        { save && access && (
+                        { save  && (
                             <button type="button" className="btn bg-blue-500 btn-primary" data-task-id={task?._id || ''} onClick={saveHandler}>Save Changes</button> 
                         )}
                     </div>

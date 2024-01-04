@@ -8,7 +8,7 @@ const Container = () => {
   
   return (
     <>
-        <div className="container-fluid text-center">
+        <div className="container-fluid text-center main">
             <div className="row py-6 px-2 relative" >
                 <SidebarToggle></SidebarToggle>
                 <Sidebar></Sidebar>

@@ -11,11 +11,11 @@ const Users = () => {
   return (
     <>
         <Header title={'All Users'} addbtn={false} />
-        <ul class="list-group user-list">
+        <ul className="list-group user-list">
           { allUsers && allUsers.map((user) => {
             return (
 
-                <li key={user.email} class="list-group-item ">
+                <li key={user.email} className="list-group-item ">
                   {user.name}
                 </li> 
               )

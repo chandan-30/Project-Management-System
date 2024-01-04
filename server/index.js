@@ -11,10 +11,11 @@ const cookieParser = require('cookie-parser');
 
 const { User } = require('./models/userModel');
 const { Task } = require('./models/taskModel');
+const { authenticateToken } = require('./middleware/authenticateToken');
 
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 8000;
 
@@ -25,7 +26,6 @@ app.listen( PORT, () => {
 });
 
 app.get('/users', async (req, res) => {
-  console.log('am here')
     try {
         const users = await User.find();
         return res.status(200).json(users);
@@ -45,7 +45,7 @@ app.get('/tasks', async (req, res) => {
       }
 });
 
-app.put("/tasks/:id", async (req, res) => {
+app.put("/tasks/:id", authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true });
@@ -57,7 +57,7 @@ app.put("/tasks/:id", async (req, res) => {
   
 });
 
-app.post("/tasks/", async (req, res) => {
+app.post("/tasks/", authenticateToken, async (req, res) => {
   try {
     const newTask = new Task({...req.body});
     const addTask = await newTask.save();
@@ -68,7 +68,7 @@ app.post("/tasks/", async (req, res) => {
   }
 });
 
-app.delete("/tasks/:id", async (req, res) => {
+app.delete("/tasks/:id", authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
     const deletedTask = await Task.findByIdAndDelete(id);
@@ -84,14 +84,15 @@ app.post('/register', async(req, res) => {
   try{
       //get all data from body
       const { name, email, password, role } = req.body;
+      
       // all the data should exists
       if ( !(name && email && password && role) ) {
-          res.status(400).json({'error': 'All fields are required!'});
+          return res.status(400).json({'error': 'All fields are required!'});
       }
       // check if user already exists
       const existingUser = await User.findOne( {email} );
       if (existingUser) {
-          res.status(400).json({'error': 'Email already exist!'});
+          return res.status(400).json({'error': 'Email already exist!'});
       }
       // encrypt the password
      const encryptedPassword =  await bcrypt.hash(password, 10);
@@ -110,17 +111,17 @@ app.post('/register', async(req, res) => {
           },
           'secret',
           {
-              expiresIn: '2h',
+              expiresIn: '5h',
           }
      );
 
      user.token = token;
      user.password = undefined;
 
-     res.status(200).json(user);
+     return res.status(201).json(user);
 
   }catch(err) {
-    res.status(500).json({'error': 'Oops, Something bad occured !'});
+    return res.status(500).json({'error': 'Oops, Something bad occured !'});
   }
 });
 
@@ -128,18 +129,22 @@ app.post('/login', async(req, res) => {
   try{
     // get all data from frontend
     const {email, password} = req.body;
+    
     // validation
     if(!(email && password)){
-      res.status(400).json({'error': 'All fields are required!'});
+      return res.status(400).json({'error': 'All fields are required!'});
     }
     // find user in DB
     const user = await User.findOne( {email} );
-    // If user doesn't exist, then what ?
+    // If user doesn't exist
     if (!user) {
-      res.status(400).json({ found: false});
+      return res.status(400).json({ 'success': false, 'error': 'User not found' });
     }
-    // match the password
-    if (user && (await bcrypt.compare(password, user.password)) ) {
+
+    // Match the password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (isPasswordValid) {
+
       const token = jwt.sign(
         {
           id: user._id,
@@ -147,7 +152,7 @@ app.post('/login', async(req, res) => {
         },
         'secret',
         {
-          expiresIn: '2h',
+          expiresIn: '5h',
         }
       );
       
@@ -155,19 +160,28 @@ app.post('/login', async(req, res) => {
       user.token = token;
       user.password = undefined;
 
-      //cookie section
-      const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-      };
-      res.status(200).cookie("token", token, options).json({
-        success: true,
+      // //cookie section
+      // const options = {
+      //   expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      //   httpOnly: true,
+      // };
+
+      // return res.status(201).cookie("token", token, options).json({
+      //   success: true,
+      //   token,
+      //   user
+      // });
+      return res.status(201).json({
         token,
-        user
+        user,
       })
+
+    } else {
+      // Incorrect password
+      return res.status(401).json({ 'success': false, 'error': 'Incorrect password' });
     }
     
   }catch(err){
-    res.status(500).json({'error': 'Oops, Something bad occured !'});
+    return res.status(500).json({'error': 'Oops, Something bad occured !'});
   }
 })

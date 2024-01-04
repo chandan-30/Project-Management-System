@@ -31,8 +31,6 @@ export const taskSlice = createSlice({
         removeTask: (state, action) => {
             if (action.payload) {
                 state.tasks.forEach( (task, index) => {
-                
-                    console.log(task, action.payload)
                     if (task._id === action.payload._id) {
                         state.tasks.splice(index, 1);
                     }

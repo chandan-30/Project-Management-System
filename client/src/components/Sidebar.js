@@ -6,7 +6,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { GrLogout } from "react-icons/gr";
 import { Link } from 'react-router-dom';
-import AnimatedButton from './AnimatedButton'
+import AnimatedButton from './AnimatedButton';
 
 const Sidebar = () => {
     
@@ -21,6 +21,10 @@ const Sidebar = () => {
             sideBar.style.display = 'none';
         }        
     };
+
+    const logout = () => {
+        localStorage.setItem('token','');
+    }
 
   return (
     <>
@@ -47,7 +51,7 @@ const Sidebar = () => {
                 <li> 
                     <GrLogout />
                     <AnimatedButton>
-                    <Link to="/login" > Logout </Link>
+                    <Link to="/login" onClick={logout} > Logout </Link>
                     </AnimatedButton>
                 </li>
             </ul>
