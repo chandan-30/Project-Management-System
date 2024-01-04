@@ -1,11 +1,11 @@
-import React, { } from 'react'
+import React from 'react'
 import './container.css';
-import { Sidebar, SidebarToggle, Header } from '../components';
+import { Sidebar, SidebarToggle } from '../components';
 import { Outlet } from 'react-router-dom';
 
 
 const Container = () => {
-
+  
   return (
     <>
         <div className="container-fluid text-center">
@@ -13,7 +13,7 @@ const Container = () => {
                 <SidebarToggle></SidebarToggle>
                 <Sidebar></Sidebar>
                 <div className="col dashboard">
-                    <Header />
+                    
                     <Outlet />
                 </div>
             </div>

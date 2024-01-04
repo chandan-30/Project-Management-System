@@ -22,7 +22,7 @@ export const taskSlice = createSlice({
         editTask: (state, action) => {
             if (action.payload) {
                 state.tasks.forEach( (task, index) => {
-                    if (task.id === action.payload.id) {
+                    if (task._id === action.payload._id) {
                         state.tasks[index] = action.payload;
                     }
                 });
@@ -31,7 +31,9 @@ export const taskSlice = createSlice({
         removeTask: (state, action) => {
             if (action.payload) {
                 state.tasks.forEach( (task, index) => {
-                    if (task.id === action.payload.id) {
+                
+                    console.log(task, action.payload)
+                    if (task._id === action.payload._id) {
                         state.tasks.splice(index, 1);
                     }
                 });

@@ -41,7 +41,7 @@ const Sidebar = () => {
                 <li> 
                     <LuUsers />
                     <AnimatedButton>
-                        All Users
+                    <Link to="/users" > All Users </Link>
                     </AnimatedButton>
                 </li>
                 <li> 

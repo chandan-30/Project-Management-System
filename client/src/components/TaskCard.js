@@ -34,13 +34,14 @@ const TaskCard = ({title, save, id, disable, task}) => {
                     }
                     const updatedTask = res.data;
                     dispatch(editTask(updatedTask));
-                    console.log('Task updated:', updatedTask);
-                    // Handle success or update the state as needed
+                    
+                    alert('Task has been updated successfully!');
                     })
                 .catch(error => {
                     console.error('Error updating task:', error);
-                });
+            });
          } else {
+            // Make a POST request to add new task
             axios.post(`http://localhost:8000/tasks/${taskId}`, form)
                 .then(res => {
                     if (res.status !== 201 && res.statusText !== 'OK' ) {
@@ -48,13 +49,12 @@ const TaskCard = ({title, save, id, disable, task}) => {
                     }
                     const updatedTask = res.data;
                     dispatch(addTask(updatedTask));
-                    console.log('Task updated:', updatedTask);
-                    // Handle success or update the state as needed
+                    
+                    alert('New Task has been created successfully!');
                     })
                 .catch(error => {
                     console.error('Error updating task:', error);
-                });
-            
+            });
          }
     }
 
@@ -80,12 +80,12 @@ const TaskCard = ({title, save, id, disable, task}) => {
                     </div>
 
                     <div className='modal-body taskModal__body'>
-                        <InputElement val={taskDetails.Title} taskDetails={{form, setForm}} disable={disable} label={'Title'} type={'text'} />
-                        <InputElement val={taskDetails.Description} taskDetails={{form, setForm}} disable={disable} label={'Description'} type={'textarea'} />
-                        <InputElement val={taskDetails.AssignedTo} taskDetails={{form, setForm}} disable={disable} label={'AssignedTo'} type={'text'} />
-                        <InputElement val={taskDetails.Deadline} taskDetails={{form, setForm}} disable={disable} label={'Deadline'} type={'date'} />
-                        <InputElement val={taskDetails.Priority} taskDetails={{form, setForm}} disable={disable} label={'Priority'} type={'select'} />
-                        <InputElement val={taskDetails.Status} taskDetails={{form, setForm}} disable={disable} label={'Status'} type={'select'} />
+                        <InputElement val={form.Title} taskDetails={{form, setForm}} disable={disable} label={'Title'} type={'text'} />
+                        <InputElement val={form.Description} taskDetails={{form, setForm}} disable={disable} label={'Description'} type={'textarea'} />
+                        <InputElement val={form.AssignedTo} taskDetails={{form, setForm}} disable={disable} label={'AssignedTo'} type={'text'} />
+                        <InputElement val={form.Deadline} taskDetails={{form, setForm}} disable={disable} label={'Deadline'} type={'date'} />
+                        <InputElement val={form.Priority} taskDetails={{form, setForm}} disable={disable} label={'Priority'} type={'select'} />
+                        <InputElement val={form.Status} taskDetails={{form, setForm}} disable={disable} label={'Status'} type={'select'} />
                     </div>
                     { save && (
                         <p className='text-sm opacity-40'>

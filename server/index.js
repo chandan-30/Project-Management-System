@@ -57,3 +57,15 @@ app.post("/tasks/", async (req, res) => {
     return res.status(400).json({ error: 'Failed to process request' });
   }
 });
+
+app.delete("/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedTask = await Task.findByIdAndDelete(id);
+    return res.status(200).json(deletedTask);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error: 'Failed to process request' });
+  }
+  
+});

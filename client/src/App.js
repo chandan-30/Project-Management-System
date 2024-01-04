@@ -1,6 +1,6 @@
 import { Container } from "./containers";
 import { Routes, Route } from 'react-router-dom';
-import { Dashboard, Tickets } from './components';
+import { Dashboard, Users } from './components';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUser } from "./reducers/userSlice";
@@ -10,7 +10,7 @@ import axios from "axios";
 function App() {
 
   const dispatch = useDispatch();
-
+  
   useEffect( () => {
     //Get Users
     axios.get('http://localhost:8000/users').then( async res => {
@@ -41,8 +41,9 @@ function App() {
       <Routes>
             <Route path="/" element={<Container />}>
               <Route index element={<Dashboard />} />
-              <Route path="tickets" element={<Tickets />} />
+              <Route path="users" element={<Users />} />
             </Route>
+            
       </Routes>
     </>
   );

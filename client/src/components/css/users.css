@@ -1,0 +1,15 @@
+.user-list li {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    margin: auto 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    text-align:center;
+    max-height:45px;
+    
+}
+
+.user-list li img {
+    height: 30px;
+    width:30px
+}

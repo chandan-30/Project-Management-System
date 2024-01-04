@@ -2,7 +2,7 @@
     background-color: var(--secondary-color);
     color: var(--text-color);
     text-align: left;
-    padding: 15px 10px;
+    padding: 15px 10px 0px 10px;
     min-width: 200px;
     height: 250px;
 }
@@ -12,12 +12,27 @@
 
 .card__desc {
     /* max-width: 250px; */
+    min-height:40px;
 }
 
 .card__footer {
     
     bottom:10px;
     margin-top: 95px;
+}
+
+#delete {
+    position: absolute;
+    /* background-color: var(--secondary-color);
+    width: 50px;
+    height: 50px; */
+    left: 85%;
+    bottom: 10% !important;
+    
+}
+
+#delete svg {
+    margin: -1px auto;
 }
 
 .Complete {
