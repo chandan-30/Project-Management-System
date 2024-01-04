@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   role: String,
+  token: {
+    type: String,
+    default: null,
+  },
 });
 
 const User = mongoose.model('User', userSchema, 'user');

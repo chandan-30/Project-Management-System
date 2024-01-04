@@ -2,11 +2,20 @@ const db = require( './db-connect');
 const express = require( "express" );
 const cors = require('cors');
 const app = express();
+
+//User login/signup imports
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
+
 const { User } = require('./models/userModel');
 const { Task } = require('./models/taskModel');
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser);
+
 const PORT = process.env.PORT || 8000;
 
 db.connect();
@@ -16,6 +25,7 @@ app.listen( PORT, () => {
 });
 
 app.get('/users', async (req, res) => {
+  console.log('am here')
     try {
         const users = await User.find();
         return res.status(200).json(users);
@@ -69,3 +79,95 @@ app.delete("/tasks/:id", async (req, res) => {
   }
   
 });
+
+app.post('/register', async(req, res) => {
+  try{
+      //get all data from body
+      const { name, email, password, role } = req.body;
+      // all the data should exists
+      if ( !(name && email && password && role) ) {
+          res.status(400).json({'error': 'All fields are required!'});
+      }
+      // check if user already exists
+      const existingUser = await User.findOne( {email} );
+      if (existingUser) {
+          res.status(400).json({'error': 'Email already exist!'});
+      }
+      // encrypt the password
+     const encryptedPassword =  await bcrypt.hash(password, 10);
+     // save the user
+     const user = await User.create({
+          name,
+          email,
+          password: encryptedPassword,
+          role
+     });
+     // generate a token for user and send it
+     const token = jwt.sign(
+          {
+              id: user._id,
+              email
+          },
+          'secret',
+          {
+              expiresIn: '2h',
+          }
+     );
+
+     user.token = token;
+     user.password = undefined;
+
+     res.status(200).json(user);
+
+  }catch(err) {
+    res.status(500).json({'error': 'Oops, Something bad occured !'});
+  }
+});
+
+app.post('/login', async(req, res) => {
+  try{
+    // get all data from frontend
+    const {email, password} = req.body;
+    // validation
+    if(!(email && password)){
+      res.status(400).json({'error': 'All fields are required!'});
+    }
+    // find user in DB
+    const user = await User.findOne( {email} );
+    // If user doesn't exist, then what ?
+    if (!user) {
+      res.status(400).json({ found: false});
+    }
+    // match the password
+    if (user && (await bcrypt.compare(password, user.password)) ) {
+      const token = jwt.sign(
+        {
+          id: user._id,
+          email,
+        },
+        'secret',
+        {
+          expiresIn: '2h',
+        }
+      );
+      
+      // send a token
+      user.token = token;
+      user.password = undefined;
+
+      //cookie section
+      const options = {
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      };
+      res.status(200).cookie("token", token, options).json({
+        success: true,
+        token,
+        user
+      })
+    }
+    
+  }catch(err){
+    res.status(500).json({'error': 'Oops, Something bad occured !'});
+  }
+})
