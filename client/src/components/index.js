@@ -7,3 +7,4 @@ export { default as AnimatedButton } from './AnimatedButton';
 export { default as Card } from './Card';
 export { default as AddCard } from './AddCard';
 export { default as Login } from './Login';
+export { default as TaskFilters } from './TaskFilters';

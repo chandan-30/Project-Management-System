@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react'
 import './css/card.css';
 import { RiFileEditFill, RiDeleteBin4Fill } from "react-icons/ri";
@@ -12,7 +14,8 @@ const Card = ({task}) => {
     const loggedUser = useSelector( state => {
         return state.loggedUser.loggedUser;
     });
-    const showEdit = ( loggedUser.role === 'admin' || loggedUser === task.AssignedTo );
+    const showEdit = ( loggedUser.role === 'admin' || loggedUser.name === task.AssignedTo );
+    
     let desc = task.Description;
     if (desc.length > 60) {
         desc = desc.slice(0, 60) + '...';

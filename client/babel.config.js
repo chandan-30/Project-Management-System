@@ -1,1 +1,0 @@
-module.exports = 'babel.config.json';

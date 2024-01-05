@@ -5,8 +5,9 @@
     text-align: center;
     padding: 15px 10px;
     min-width: 200px;
-    height: 250px;
+    height: 300px;
     line-height: 210px;
+    border-radius: 5px;
 }
 
 .card--add svg {

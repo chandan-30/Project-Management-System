@@ -26,7 +26,6 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
     const inp = document.getElementById(_id);
     
     if ( _id !== '' && inp !== null) {
-        console.log('am', inp)
         autoComplete(inp, userNames);
     }
 
@@ -128,7 +127,7 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
                         </p>
                     )}
 
-                    {  !(showEdit? showEdit : true) && (
+                    {  !(showEdit? showEdit : false) && (
                         <p className='text-sm opacity-40 text-red-400 font-semibold'>
                             You are not allowed to edit this task !
                         </p>
@@ -138,7 +137,7 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
                         
                         <br />
                         <button type="button" className="btn bg-gray-500 btn-secondary" data-bs-dismiss="modal">Close</button>
-                        { save && ( showEdit ? showEdit : true)  && (
+                        { save && ( showEdit ? showEdit : false)  && (
                             <button type="button" className="btn bg-blue-500 btn-primary" data-task-id={task?._id || ''} onClick={saveHandler}>Save Changes</button> 
                         )}
                     </div>
