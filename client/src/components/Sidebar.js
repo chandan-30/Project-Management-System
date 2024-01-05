@@ -10,7 +10,7 @@ import AnimatedButton from './AnimatedButton';
 
 const Sidebar = () => {
 
-    const username = JSON.parse(localStorage.getItem('pmsUser')).name;
+    const username = JSON.parse(localStorage.getItem('pmsUser'))?.name;
     
     const sideBarCloseClick = (e) => {
         const sideBarToggle = document.querySelectorAll('.container-fluid .sidebarToggle')[0];

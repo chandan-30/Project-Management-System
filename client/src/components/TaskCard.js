@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { autoComplete } from '../utils';
 
-const TaskCard = ({title, save, id, disable, task, showEdit}) => {
+const TaskCard = ({title, save, id, disable, task, showEdit, isedit}) => {
 
 
 
@@ -99,7 +99,22 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
         }
     },[form]);
 
-    
+    console.log(showEdit)
+    let show;
+    if( isedit ) {
+        if ( save && showEdit )  {
+            show = true;
+        }
+        else {
+            show = false;
+        }
+    } else {
+        if(save) {
+            show = true;
+        } else {
+            show = false;
+        }
+    }
     
   return (
     <>
@@ -127,7 +142,7 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
                         </p>
                     )}
 
-                    {  !(showEdit? showEdit : false) && (
+                    {  !(showEdit? showEdit : false) && (isedit) && (
                         <p className='text-sm opacity-40 text-red-400 font-semibold'>
                             You are not allowed to edit this task !
                         </p>
@@ -137,7 +152,8 @@ const TaskCard = ({title, save, id, disable, task, showEdit}) => {
                         
                         <br />
                         <button type="button" className="btn bg-gray-500 btn-secondary" data-bs-dismiss="modal">Close</button>
-                        { save && ( showEdit ? showEdit : false)  && (
+                        
+                        { show && (
                             <button type="button" className="btn bg-blue-500 btn-primary" data-task-id={task?._id || ''} onClick={saveHandler}>Save Changes</button> 
                         )}
                     </div>

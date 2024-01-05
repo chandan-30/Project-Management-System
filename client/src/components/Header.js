@@ -23,7 +23,7 @@ const Header = ({title, addbtn }) => {
           </button>
         )}
         <div className='clear'></div>
-        <TaskCard title={'Add Task Details'} save={true} disable={''} id={`addTask-${taskStatelen}`} task={''}/>
+        <TaskCard title={'Add Task Details'} save={true} isedit={false} disable={''} id={`addTask-${taskStatelen}`} task={''}/>
     </div>
   )
 }

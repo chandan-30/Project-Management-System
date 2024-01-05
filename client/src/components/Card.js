@@ -85,7 +85,7 @@ const Card = ({task}) => {
             </div>
 
             <TaskCard task={task} title={'Task Details'} save={false} disable={'disabled'} id={`task-${task._id}`}/>
-            <TaskCard task={task} title={'Edit Task Details'} save={true} disable={''} id={`editTask-${task._id}`} showEdit={showEdit} />
+            <TaskCard task={task} isedit={true} title={'Edit Task Details'} save={true} disable={''} id={`editTask-${task._id}`} showEdit={showEdit} />
             
 
         </>
