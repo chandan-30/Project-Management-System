@@ -1,0 +1,30 @@
+.invite-form-container {
+    margin-top: 8%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.invite-form-container input {
+    background-color: var(--background-color);
+    border: none;
+    color: var(--text-color);
+}
+
+.invite-form-container input:focus {
+    box-shadow: 0 0 0 0.25rem var(--secondary-color);
+    background-color: var(--background-color);
+    border: none;
+    color: var(--text-color);
+}
+
+.invite-form-container .form-floating input::placeholder { /* Most modern browsers support this now. */
+    color:  var(--text-color);
+    opacity: 70%;
+ }
+
+@media screen and (min-width: 960px) {
+    .invite-form-container {
+        width:70%;
+        margin: 8% auto;
+    }
+}

@@ -1,0 +1,17 @@
+
+.main .row > div {
+    background-color: var(--primary-color);
+    margin: 10px;
+    border: 2px solid rgba(120, 118, 118, 0.318);
+    border-radius: 6px;
+    
+}
+
+.dashboard {
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.container-fluid, .container-fluid .row, .container-fluid .row .col {
+    min-height: 100vh;
+}

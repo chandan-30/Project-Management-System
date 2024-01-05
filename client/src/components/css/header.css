@@ -1,0 +1,16 @@
+.dashboard__header {
+    padding: 0 5%;
+    margin-bottom: 8%;
+}
+
+.dashboard__header h2 {
+    float: left;
+}
+
+.dashboard__header__btn {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}

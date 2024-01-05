@@ -1,0 +1,1 @@
+export { default as img1 } from './avatar-1.jpg';
