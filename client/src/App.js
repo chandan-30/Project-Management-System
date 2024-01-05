@@ -1,6 +1,6 @@
 import { Container } from "./containers";
 import { Routes, Route } from 'react-router-dom';
-import { Dashboard, Users, Login, Register } from './components';
+import { Dashboard, Users, Login } from './components';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUser } from "./reducers/userSlice";
@@ -50,7 +50,6 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="users" element={<Users />} />
             </Route>
-            <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             
       </Routes>

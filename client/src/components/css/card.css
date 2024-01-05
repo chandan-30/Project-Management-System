@@ -3,22 +3,36 @@
     color: var(--text-color);
     text-align: left;
     padding: 15px 10px 0px 10px;
-    min-width: 200px;
-    height: 250px;
+    min-width: 250px;
+    height: 300px;
 }
 
 .card__title { 
+    max-width: 85%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .card__desc {
     /* max-width: 250px; */
+    max-width: 85%;
     min-height:40px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.High {
+    color: var(--btn-red);
+}
+
+.Low {
+    color: rgb(255, 213, 0);
 }
 
 .card__footer {
-    
     bottom:10px;
-    margin-top: 95px;
+    margin-top: 120px;
 }
 
 #delete {
@@ -26,8 +40,8 @@
     /* background-color: var(--secondary-color);
     width: 50px;
     height: 50px; */
-    left: 90%;
-    top: 10%;
+    left: 87%;
+    top: 7%;
     
 }
 

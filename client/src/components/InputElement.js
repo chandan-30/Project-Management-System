@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-const InputElement = ({label, type, disable, val, taskDetails }) => {
+const InputElement = ({label, type, disable, val, taskDetails, id, placeH }) => {
+
     const [inpval, setInpVal] = useState(val);
     useEffect( () => {
 
@@ -20,7 +21,7 @@ const InputElement = ({label, type, disable, val, taskDetails }) => {
                 )}
 
                 { type === 'text' && (
-                    <input onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} type={type} className="form-control" placeholder="eg: Something here" id="basic-url" aria-describedby="basic-addon3 basic-addon4" autoComplete="off" />
+                    <input onChange={(e)=>{setInpVal(e.currentTarget.value)}} value={inpval} disabled={disable} type={type} className="form-control" placeholder={placeH ? placeH : 'enter name'} id={id} aria-describedby="basic-addon3 basic-addon4" autoComplete="off" />
                 )}
 
                 { type === 'date' && (

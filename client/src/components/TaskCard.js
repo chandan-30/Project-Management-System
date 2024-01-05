@@ -5,8 +5,31 @@ import InputElement from './InputElement';
 import axios from 'axios';
 import { addTask, editTask } from '../reducers/taskSlice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { autoComplete } from '../utils';
 
-const TaskCard = ({title, save, id, disable, task}) => {
+const TaskCard = ({title, save, id, disable, task, showEdit}) => {
+
+
+
+    const users = useSelector((state) => state.user.users);
+    const userNames = users.map((user) => {
+        return user.name;
+    });
+    let _id = '';
+    if (save && task.Title) {
+        _id = `${task.Title}autofinsh`;
+    }
+    if( save && !task) {
+        _id = `autofinsh`;
+    }
+    const inp = document.getElementById(_id);
+    
+    if ( _id !== '' && inp !== null) {
+        console.log('am', inp)
+        autoComplete(inp, userNames);
+    }
+
 
     const dispatch = useDispatch();
 
@@ -94,7 +117,7 @@ const TaskCard = ({title, save, id, disable, task}) => {
                     <div className='modal-body taskModal__body'>
                         <InputElement val={form.Title} taskDetails={{form, setForm}} disable={disable} label={'Title'} type={'text'} />
                         <InputElement val={form.Description} taskDetails={{form, setForm}} disable={disable} label={'Description'} type={'textarea'} />
-                        <InputElement val={form.AssignedTo} taskDetails={{form, setForm}} disable={disable} label={'AssignedTo'} type={'text'} />
+                        <InputElement val={form.AssignedTo} taskDetails={{form, setForm}} disable={disable} label={'AssignedTo'} type={'text'} id={_id} placeH={'Auto suggestive field type something'} />
                         <InputElement val={form.Deadline} taskDetails={{form, setForm}} disable={disable} label={'Deadline'} type={'date'} />
                         <InputElement val={form.Priority} taskDetails={{form, setForm}} disable={disable} label={'Priority'} type={'select'} />
                         <InputElement val={form.Status} taskDetails={{form, setForm}} disable={disable} label={'Status'} type={'select'} />
@@ -105,17 +128,17 @@ const TaskCard = ({title, save, id, disable, task}) => {
                         </p>
                     )}
 
-                    {/* {   loggedUser.name && save && (
+                    {  !(showEdit? showEdit : true) && (
                         <p className='text-sm opacity-40 text-red-400 font-semibold'>
                             You are not allowed to edit this task !
                         </p>
                     )
-                    } */}
+                    }
                     <div className="modal-footer border-none">
                         
                         <br />
                         <button type="button" className="btn bg-gray-500 btn-secondary" data-bs-dismiss="modal">Close</button>
-                        { save  && (
+                        { save && ( showEdit ? showEdit : true)  && (
                             <button type="button" className="btn bg-blue-500 btn-primary" data-task-id={task?._id || ''} onClick={saveHandler}>Save Changes</button> 
                         )}
                     </div>

@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import AnimatedButton from './AnimatedButton';
 
 const Sidebar = () => {
+
+    const username = JSON.parse(localStorage.getItem('pmsUser')).name;
     
     const sideBarCloseClick = (e) => {
         const sideBarToggle = document.querySelectorAll('.container-fluid .sidebarToggle')[0];
@@ -33,7 +35,7 @@ const Sidebar = () => {
             <div className='img-container p-2'>
                 <img src={img1} alt={'avatar'} height={80} width={80}/>
             </div>
-            <h2 className='text-3xl font-bold profileName'> Sai Chandan Yata </h2>
+            <h2 className='text-3xl font-bold profileName'> {username} </h2>
 
             <ul className='list'>
                 <li> 

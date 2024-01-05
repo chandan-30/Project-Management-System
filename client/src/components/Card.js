@@ -12,7 +12,7 @@ const Card = ({task}) => {
     const loggedUser = useSelector( state => {
         return state.loggedUser.loggedUser;
     });
-    
+    const showEdit = ( loggedUser.role === 'admin' || loggedUser === task.AssignedTo );
     let desc = task.Description;
     if (desc.length > 60) {
         desc = desc.slice(0, 60) + '...';
@@ -52,25 +52,28 @@ const Card = ({task}) => {
         <>
             <div className='position-relative'>
                 <div className='card cursor-pointer position-relative' data-bs-toggle="modal" data-bs-target={`#task-${task._id}`}>
-                    <div className='card__title font-semibold text-md'>
+                    <div className={`card__title font-semibold text-md ${task.Priority}`} >
                         { task.Title }
                     </div>
                     <div className='card__desc mt-1 text-sm text-ellipsis'>
                         { desc }
                     </div>
+                    <div className='card__title font-semibold text-md'>
+                        { task.AssignedTo }
+                    </div>
                     <div className='card__footer'>
-                        <p className='text-xs opacity-50'> { task.Deadline } </p>
+                        <p className='text-xs opacity-50'> Deadline :: { task.Deadline } </p>
                         <div className={`float-left my-2 font-bold ${task.Status}`}>
                             {task.Status}
                         </div>
-                        <div className='float-right pt-2 text-xl'>
+                        { true && (<div className='float-right pt-2 text-xl'>
                             <button className='mr-2' data-task-id={task._id} data-bs-toggle="modal" data-bs-target={`#editTask-${task._id}`} onClick={(e)=>{
                                 e.preventDefault();
                                 e.stopPropagation();
                             }}>
                                 <RiFileEditFill className='text-2xl'/>
                             </button>
-                        </div>
+                        </div>)}
                     </div>
                 </div>
                 <button type='button' id={'delete'} data-task-id={task._id} className='z-10' onClick={(e) => deleteHandler(e)} >
@@ -79,7 +82,7 @@ const Card = ({task}) => {
             </div>
 
             <TaskCard task={task} title={'Task Details'} save={false} disable={'disabled'} id={`task-${task._id}`}/>
-            <TaskCard task={task} title={'Edit Task Details'} save={true} disable={''} id={`editTask-${task._id}`}/>
+            <TaskCard task={task} title={'Edit Task Details'} save={true} disable={''} id={`editTask-${task._id}`} showEdit={showEdit} />
             
 
         </>
