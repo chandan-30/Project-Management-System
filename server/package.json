@@ -4,7 +4,7 @@
   "description": "This directory contains the backend server for the Project Management System, built with Node.js and Express.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,7 +18,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.0.3"
+    "mongoose": "^8.0.3",
+    "socket.io": "^4.7.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

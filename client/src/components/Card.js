@@ -70,7 +70,7 @@ const Card = ({task}) => {
                             {task.Status}
                         </div>
                         { true && (<div className='float-right pt-2 text-xl'>
-                            <button className='mr-2' data-task-id={task._id} data-bs-toggle="modal" data-bs-target={`#editTask-${task._id}`} onClick={(e)=>{
+                            <button className='edit-btn' data-task-id={task._id} data-bs-toggle="modal" data-bs-target={`#editTask-${task._id}`} onClick={(e)=>{
                                 e.preventDefault();
                                 e.stopPropagation();
                             }}>
