@@ -123,9 +123,9 @@ Start the React local
 | `  id  `    | `  string ` | Deletes a Task                    |
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS, Bootstrap, react-router, axios
+**Client:** React, Redux, TailwindCSS, Bootstrap, react-router, axios, Socket.io-client
 
-**Server:** Node, Express, JWT, REST API
+**Server:** Node, Express, JWT, REST API, Socket.io
 
 **Database:** MongoDB
 

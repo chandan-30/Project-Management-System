@@ -40,10 +40,12 @@
     /* background-color: var(--secondary-color);
     width: 50px;
     height: 50px; */
-    left: 87%;
+    left: calc(100% - 40px);
     top: 7%;
     
 }
+
+.edit-btn { margin-right: 5px; }
 
 #delete svg {
     margin: -1px auto;

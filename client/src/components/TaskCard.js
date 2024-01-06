@@ -16,6 +16,7 @@ const TaskCard = ({title, save, id, disable, task, showEdit, isedit}) => {
     const userNames = users.map((user) => {
         return user.name;
     });
+    
     let _id = '';
     if (save && task.Title) {
         _id = `${task.Title}autofinsh`;
@@ -99,7 +100,6 @@ const TaskCard = ({title, save, id, disable, task, showEdit, isedit}) => {
         }
     },[form]);
 
-    console.log(showEdit)
     let show;
     if( isedit ) {
         if ( save && showEdit )  {
