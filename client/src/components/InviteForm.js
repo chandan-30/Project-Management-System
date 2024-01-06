@@ -1,6 +1,6 @@
 import React from 'react'
 import './css/inviteform.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { serviceId, templateId, publickey, templateParams } from '../utils/emailJsIds';
 import emailjs from '@emailjs/browser';
 
@@ -9,12 +9,21 @@ const InviteForm = () => {
         name:'',
         email:'',
     });
+    const ref = useRef(null);
+    ref.current = JSON.parse(localStorage.getItem('pmsUser'));
 
 const submitHandler = (e) => {
     e.preventDefault();
     templateParams.to_name = form.name;
     templateParams.to_email = form.email;
-    
+    if( ref.current.role !== 'admin' ) { 
+        alert('Only admin is allowed to send an invite');
+        setForm({
+            name:'',
+            email:'',  
+        })
+        return;
+    }
     emailjs.send(serviceId, templateId, templateParams, publickey )
         .then( (res) => {
             alert('successfully sent invite');
