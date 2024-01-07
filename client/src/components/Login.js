@@ -125,7 +125,7 @@ const Login = () => {
                             <button type="submit" className="btn btn-success bg-green-600">Sign Up</button>
                             <p className='mt-4'>
                                 Already a User ?
-                                <Link className="border-b-2 ml-2 border-green-400 "  onClick={toggleSignup}> Sign In</Link>
+                                <Link className=" ml-2 text-green-400 "  onClick={toggleSignup}> Sign In</Link>
                             </p>
                         </div>
                     </form>
@@ -143,7 +143,7 @@ const Login = () => {
                             <button type="submit" className="btn btn-success bg-green-600">Sign In</button>
                             <p className='mt-4'>
                                 New to this platform ?
-                                <Link className="border-b-2 ml-2 border-green-400 " onClick={toggleSignup}> Sign Up</Link>
+                                <Link className="ml-2 text-green-400 " onClick={toggleSignup}> Sign Up</Link>
                             </p>
                         </div>
                     </form>
