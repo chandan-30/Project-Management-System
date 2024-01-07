@@ -7,6 +7,7 @@ import TaskCard from './TaskCard';
 import axios from 'axios';
 import { removeTask } from '../reducers/taskSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ShowTask from './ShowTask';
 
 const Card = ({task}) => {
     
@@ -83,8 +84,8 @@ const Card = ({task}) => {
                     <RiDeleteBin4Fill className='text-2xl'/>
                 </button>
             </div>
-
-            <TaskCard task={task} title={'Task Details'} save={false} disable={'disabled'} id={`task-${task._id}`}/>
+            
+            <ShowTask id={`task-${task._id}`} taskId={task._id} task={task} />
             <TaskCard task={task} isedit={true} title={'Edit Task Details'} save={true} disable={''} id={`editTask-${task._id}`} showEdit={showEdit} />
             
 
