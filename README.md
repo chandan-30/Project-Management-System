@@ -123,7 +123,7 @@ Start the React local
 | `  id  `    | `  string ` | Deletes a Task                    |
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS, Bootstrap, react-router, axios, Socket.io-client
+**Client:** React, Redux, TailwindCSS, Bootstrap, react-router, axios, Socket.io-client, EmailJS
 
 **Server:** Node, Express, JWT, REST API, Socket.io
 
