@@ -13,5 +13,5 @@
 }
 
 .container-fluid, .container-fluid .row, .container-fluid .row .col {
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }

@@ -15,7 +15,7 @@ const Card = ({task}) => {
     const loggedUser = useSelector( state => {
         return state.loggedUser.loggedUser;
     });
-    const showEdit = ( loggedUser.role === 'admin' || loggedUser.name === task.AssignedTo );
+    const showEdit = ( loggedUser.role === 'admin' || loggedUser.name.toLowerCase() === task.AssignedTo.toLowerCase() );
     
     let desc = task.Description;
     if (desc.length > 60) {
