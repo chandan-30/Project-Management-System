@@ -4,6 +4,10 @@
 This is a task management application that allows users to create, edit, and delete tasks. Users can also set deadlines, assign tasks to other users, and set priorities. The application uses React and Redux for state management, JWT for authentication and authorization, Express.JS and Socket.io for real time updates, and it is built with Bootstrap components, Tailwind utilities for a clean and modern look.
 
 
+## Live Demo
+
+![](PMS-gif.gif)
+
 ## Run Locally
 
 Clone the project
